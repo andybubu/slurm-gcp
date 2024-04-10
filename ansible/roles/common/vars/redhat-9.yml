@@ -26,7 +26,6 @@ common_packages:
 - curl
 - diffstat
 - dnf-utils
-- drpm
 - elfutils-libelf-devel
 - epel-release
 - flex
