@@ -23,7 +23,7 @@
   command: dnf config-manager --set-enabled rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms
 
 - name : Enable EPEL repository
-  command: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+  command: dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 # - name: Install epel-release Repository
 #   yum:
 #     name: epel-release
