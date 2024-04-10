@@ -1,4 +1,4 @@
 ---
 # options are 'cloud-ops' or 'legacy' or 'none'
 # 'legacy' = stackdriver
-monitoring_agent: legacy
+monitoring_agent: cloud-ops
