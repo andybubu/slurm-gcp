@@ -22,7 +22,7 @@
 - name: Enable RHEL 9 PowerTools Repository
   command: dnf config-manager --set-enabled rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms
 
-- name: Install epel-release Repository
-  yum:
-    name: epel-release
-    state: present
+# - name: Install epel-release Repository
+#   yum:
+#     name: epel-release
+#     state: present
