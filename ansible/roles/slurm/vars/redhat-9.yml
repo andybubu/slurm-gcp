@@ -29,6 +29,7 @@ slurm_packages:
 - libyaml-devel
 - lua
 - lua-devel
+- lua-posix
 - lz4-devel
 - man2html-core
 - ncurses-devel
