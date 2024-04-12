@@ -19,12 +19,20 @@
     # state: latest
     update_cache: yes
 
-- name: Enable RHEL 9 PowerTools Repository
-  command: dnf config-manager --set-enabled rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms
+- name: List all enabled repositories
+  yum:
+    list: repos
+  register: yum_repos
 
-- name : Enable EPEL repository
-  command: dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-# - name: Install epel-release Repository
-#   yum:
-#     name: epel-release
-#     state: present
+- name: Enable RHEL 9 Repository
+  command: dnf config-manager --set-enabled rhel-9-for-x86_64-appstream-rpms rhel-9-for-x86_64-baseos-rpms codeready-builder-for-rhel-9-x86_64-rpms
+  when: "'rhel-9-for-x86_64-baseos-rpms' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
+
+- name: Enable rh-cloud-9 Repository
+  command: dnf config-manager --set-enabled rhui-rhel-9-for-x86_64-baseos-rhui-rpms rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms
+  when: "'rhui-rhel-9-for-x86_64-baseos-rhui-rpm' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
+
+- name: Install epel-release Repository
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    state: present
