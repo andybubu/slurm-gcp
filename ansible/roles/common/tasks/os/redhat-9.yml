@@ -32,11 +32,5 @@
   command: dnf config-manager --set-enabled rhui-rhel-9-for-x86_64-baseos-rhui-rpms rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms rhui-codeready-builder-for-rhel-9-x86_64-rhui-rpms
   when: "'rhui-rhel-9-for-x86_64-baseos-rhui-rpm' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
 
-- name: Install epel-release Repository
-  yum_repository:
-    name: epel
-    description: EPEL-9 YUM REPO
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: https://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+- name : Enable EPEL repository
+  command: dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
