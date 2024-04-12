@@ -33,6 +33,10 @@
   when: "'rhui-rhel-9-for-x86_64-baseos-rhui-rpm' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
 
 - name: Install epel-release Repository
-  yum:
-    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-    state: present
+  yum_repository:
+    name: epel
+    description: EPEL-9 YUM REPO
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
