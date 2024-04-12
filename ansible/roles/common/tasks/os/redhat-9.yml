@@ -23,6 +23,10 @@
   yum:
     list: repos
   register: yum_repos
+  
+- name: Show repos
+  debug:
+    var: yum_repos.results
 
 - name: Enable RHEL 9 Repository
   command: dnf config-manager --set-enabled rhel-9-for-x86_64-appstream-rpms rhel-9-for-x86_64-baseos-rpms codeready-builder-for-rhel-9-x86_64-rpms
