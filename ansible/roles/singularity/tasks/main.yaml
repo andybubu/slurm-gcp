@@ -63,7 +63,7 @@
 - name: Build Singularity
   ansible.builtin.command:
     cmd: >
-      mconfig --prefix={{ singularity_paths.apps }} > /dev/null
+      sh mconfig --prefix={{ singularity_paths.apps }} > /dev/null
       make -C ./builddir > /dev/null
       make -C ./builddir install > /dev/null
   args:
