@@ -63,10 +63,12 @@
 - name: Build Singularity
   ansible.builtin.command:
     cmd: >
-      sh mconfig --prefix={{ singularity_paths.apps }} > /dev/null
+      sh mconfig --prefix='{{ singularity_paths.apps }}' > /dev/null
       make -C ./builddir > /dev/null
       make -C ./builddir install > /dev/null
+    creates: '{{ singularity_paths.apps }}'
   args:
     chdir: '{{ singularity_paths.build }}'
   register: build_output
   changed_when: build_output.rc != 0
+  failed_when: "'failed to build' in build_output.stderr"
