@@ -58,7 +58,7 @@
 - name: Extract Tarball
   ansible.builtin.unarchive:
     src: '{{ paths.build }}/{{ singularity_tar }}'
-    dest: '{{ paths.build }}'
+    dest: '{{ singularity_paths.build }}'
 
 - name: Build Singularity
   ansible.builtin.command:
@@ -67,6 +67,6 @@
       make -C ./builddir > /dev/null
       make -C ./builddir install > /dev/null
   args:
-    chdir: '{{ singularity_dir }}'
+    chdir: '{{ singularity_paths.build }}'
   register: build_output
   changed_when: build_output.rc != 0
