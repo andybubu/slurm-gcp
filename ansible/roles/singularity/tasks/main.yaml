@@ -80,5 +80,5 @@
 
 - name: Set Singularity Environment Variable
   ansible.builtin.shell: |
-    echo 'export PATH=$PATH:{{ singularity_paths.apps }}/singularity/bin' >> ~/.bashrc
+    echo 'export PATH=$PATH:{{ singularity_paths.apps }}/bin' >> ~/.bashrc
     source ~/.bashrc
