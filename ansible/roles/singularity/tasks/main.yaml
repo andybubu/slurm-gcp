@@ -60,10 +60,20 @@
     src: '{{ paths.build }}/{{ singularity_tar }}'
     dest: '{{ singularity_paths.build }}'
 
-- name: Build Singularity
+- name: Configure Singularity Install Path
   ansible.builtin.shell: |
     sh mconfig --prefix={{ singularity_paths.apps }} > /dev/null
+  args:
+    chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
+
+- name: Make Singularity
+  ansible.builtin.shell: |
     make -C ./builddir > /dev/null
+  args:
+    chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
+
+- name: Make Install Singularity
+  ansible.builtin.shell: |
     make -C ./builddir install > /dev/null
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
