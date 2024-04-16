@@ -63,6 +63,7 @@
 - name: Configure Singularity Install Path
   ansible.builtin.shell: |
     export PATH=$PATH:{{ go_paths.install }}/go/bin
+    go version
     ./mconfig --prefix={{ singularity_paths.apps }}
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
