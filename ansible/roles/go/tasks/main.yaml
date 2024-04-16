@@ -39,7 +39,9 @@
     remote_src: true
 
 - name: Set Go Environment Variable
-  ansible.builtin.shell: |
-    echo 'export PATH=$PATH:{{ go_paths.install }}/go/bin' > /etc/profile.d/go_path.sh
-    source  /etc/profile.d/go_path.sh
-    go version
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/gopath.sh
+    line: 'export PATH=$PATH:{{ go_paths.install }}/go/bin'
+    create: yes
+- name: Restart instance
+  ansible.builtin.reboot:
