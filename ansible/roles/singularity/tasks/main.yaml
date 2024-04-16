@@ -60,12 +60,8 @@
     src: '{{ paths.build }}/{{ singularity_tar }}'
     dest: '{{ singularity_paths.build }}'
 
-- name: Load facts
-  setup:
-
-- name: Configure Singularity Install Path
+- name: Configure Singularity
   ansible.builtin.shell: |
-    go version
     ./mconfig --prefix={{ singularity_paths.apps }}
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
@@ -78,12 +74,14 @@
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
 
-- name: Make Install Singularity
+- name: Install Singularity
   ansible.builtin.shell: |
     make -C ./builddir install > /dev/null
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
 
-- name: Set Singularity Environment Variable
-  ansible.builtin.shell: |
-    echo 'export PATH=$PATH:{{ singularity_paths.apps }}/bin' >> /etc/profile.d/singularity_path.sh
+- name: Set Singularity PATH Environment Variable
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/singularity_path.sh
+    line: 'export PATH=$PATH:{{ singularity_paths.apps }}/bin'
+    create: yes
