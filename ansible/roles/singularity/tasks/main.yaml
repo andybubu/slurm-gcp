@@ -60,12 +60,17 @@
     src: '{{ paths.build }}/{{ singularity_tar }}'
     dest: '{{ singularity_paths.build }}'
 
+- name: Load facts
+  setup:
+
 - name: Configure Singularity Install Path
   ansible.builtin.shell: |
     go version
-    mconfig --prefix={{ singularity_paths.apps }}
+    ./mconfig --prefix={{ singularity_paths.apps }}
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
+  environment:
+    PATH: "{{ ansible_env.PATH }}:{{ go_paths.install }}/go/bin"
 
 - name: Make Singularity
   ansible.builtin.shell: |
@@ -81,5 +86,4 @@
 
 - name: Set Singularity Environment Variable
   ansible.builtin.shell: |
-    echo 'export PATH=$PATH:{{ singularity_paths.apps }}/bin' >> ~/.bashrc
-    source ~/.bashrc
+    echo 'export PATH=$PATH:{{ singularity_paths.apps }}/bin' >> /etc/profile.d/singularity_path.sh
