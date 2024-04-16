@@ -40,5 +40,5 @@
 
 - name: Set Go Environment Variable
   ansible.builtin.shell: |
-    echo 'export PATH=$PATH:{{ go_paths.install }}/go/bin' >> ~/.bashrc
+    echo 'export PATH=$PATH:{{ go_paths.install }}/go/bin' >> /etc/bashrc
     source ~/.bashrc
