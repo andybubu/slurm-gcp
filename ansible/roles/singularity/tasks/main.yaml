@@ -70,7 +70,7 @@
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
   environment:
-    PATH: "{{ ansible_env.PATH }}:{{ go_paths.install }}/go/bin"
+    PATH: "{{ ansible_env.PATH }}:{{ paths.install }}/go/bin"
 
 - name: Make Singularity
   ansible.builtin.shell: |
