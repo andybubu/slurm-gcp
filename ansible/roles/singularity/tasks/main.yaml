@@ -67,9 +67,6 @@
     make -C ./builddir install > /dev/null
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
-  # register: build_output
-  # changed_when: build_output.rc != 0
-  # failed_when: "'failed to build' in build_output.stderr"
 
 - name: Set Singularity Environment Variable
   ansible.builtin.shell: |

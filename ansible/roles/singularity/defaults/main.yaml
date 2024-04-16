@@ -14,7 +14,7 @@
 # limitations under the License.
 
 singularity_version: 4.1.2
-singularity_dir: singularity-{{ singularity_version }}
+singularity_dir: singularity-ce-{{ singularity_version }}
 singularity_tar: '{{ singularity_dir }}.tar.gz'
 singularity_url: https://github.com/sylabs/singularity/releases/download/v{{ singularity_version }}/singularity-ce-{{ singularity_version }}.tar.gz
 # This is set separate from path.installation as slurm searches /usr and /usr/local for singularity
