@@ -43,5 +43,3 @@
     path: /etc/profile.d/gopath.sh
     line: 'export PATH=$PATH:{{ go_paths.install }}/go/bin'
     create: yes
-- name: Restart instance
-  ansible.builtin.reboot:

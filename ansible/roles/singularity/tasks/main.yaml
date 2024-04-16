@@ -61,7 +61,7 @@
     dest: '{{ singularity_paths.build }}'
 
 - name: Configure Singularity
-  ansible.builtin.shell: |
+  ansible.builtin.command: |
     ./mconfig --prefix={{ singularity_paths.apps }}
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
