@@ -67,7 +67,8 @@
 
   roles:
   - motd
-  - common
+  - role: common
+    tags: ['common']
   - kernel
   - selinux
   - role: cuda
