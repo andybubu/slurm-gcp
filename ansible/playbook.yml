@@ -89,7 +89,8 @@
   - mariadb
   - libjwt
   - lmod
-  - singularity
+  - role: singularity
+    tags: ['singularity']
   - slurm
   - slurmcmd
   - role: ompi
