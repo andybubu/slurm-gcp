@@ -71,4 +71,4 @@
     chdir: '{{ singularity_paths.build }}'
   register: build_output
   changed_when: build_output.rc != 0
-  failed_when: "'failed to build' in build_output.stderr"
+  # failed_when: "'failed to build' in build_output.stderr"
