@@ -42,3 +42,4 @@
   ansible.builtin.shell: |
     echo 'export PATH=$PATH:{{ go_paths.install }}/go/bin' >> ~/.bashrc
     source ~/.bashrc
+    go version
