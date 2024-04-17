@@ -66,6 +66,10 @@
     ./mconfig --prefix={{ singularity_paths.apps }}
     make -C ./builddir
     make -C ./builddir install
+  environment:
+    GOPATH: "{{ singularity_go_path }}"
+    PATH: "{{ singularity_go_path }}/bin:/usr/local/bin:{{ansible_env.PATH}}"
+
 
 - name: Set Singularity PATH Environment Variable
   ansible.builtin.shell:

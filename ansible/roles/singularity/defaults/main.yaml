@@ -17,12 +17,9 @@ singularity_version: 4.1.2
 singularity_dir: singularity-ce-{{ singularity_version }}
 singularity_tar: '{{ singularity_dir }}.tar.gz'
 singularity_url: https://github.com/sylabs/singularity/releases/download/v{{ singularity_version }}/singularity-ce-{{ singularity_version }}.tar.gz
-# This is set separate from path.installation as slurm searches /usr and /usr/local for singularity
-# singularity_installation_path: /usr/local
+singularity_go_path: "/usr/local/go"
 
 singularity_paths:
   install: '{{ paths.install }}'
-  src: '{{ paths.apps }}/singularity/{{ singularity_version }}/src'
-  build: '{{ paths.build }}/singularity/build'
-  apps: '{{ paths.apps }}/{{ singularity_dir }}'
+  apps: '{{ paths.apps }}/singularity/{{ singularity_version }}'
   modulefiles: '{{ paths.modulefiles }}/singularity'
