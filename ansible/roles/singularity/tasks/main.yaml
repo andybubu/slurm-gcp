@@ -68,7 +68,9 @@
     make -C ./builddir install
   environment:
     GOPATH: "{{ singularity_go_path }}"
+    GOCACHE: "~/.cache/go-build"
     PATH: "{{ singularity_go_path }}/bin:/usr/local/bin:{{ansible_env.PATH}}"
+    TMPDIR: "/var/tmp/"
 
 
 - name: Set Singularity PATH Environment Variable
