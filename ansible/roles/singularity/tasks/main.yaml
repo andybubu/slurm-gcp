@@ -29,7 +29,6 @@
     state: directory
     mode: '0755'
   loop:
-    - '{{ singularity_paths.build }}'
     - '{{ singularity_paths.apps }}'
     - '{{ singularity_paths.modulefiles }}'
 
@@ -52,22 +51,22 @@
 - name: Download Singularity
   ansible.builtin.get_url:
     url: '{{ singularity_url }}'
-    dest: '{{ paths.build }}/{{ singularity_tar }}'
+    dest: {{ singularity_paths.apps }}
     mode: '0644'
 
 - name: Extract Tarball
   ansible.builtin.unarchive:
-    src: '{{ paths.build }}/{{ singularity_tar }}'
-    dest: '{{ singularity_paths.build }}'
+    src: '{{ singularity_paths.apps }}/{{ singularity_tar }}'
+    dest: '{{ singularity_paths.apps }}'
 
 - name: Build and Install Singularity
   ansible.builtin.shell: |
     . ~/.profile
+    cd {{ singularity_paths.apps }}
     ./mconfig --prefix={{ singularity_paths.apps }}
     make -C ./builddir
     make -C ./builddir install
-  args:
-    chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
+
 
 - name: Set Singularity PATH Environment Variable
   ansible.builtin.shell:
@@ -77,5 +76,5 @@
 
 - name: Remove downloaded tar file
   ansible.builtin.file:
-    path: '{{ paths.build }}/{{ singularity_tar }}'
+    path: '{{ singularity_paths.apps }}/{{ singularity_tar }}'
     state: absent
