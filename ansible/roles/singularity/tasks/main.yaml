@@ -51,7 +51,7 @@
 - name: Download Singularity
   ansible.builtin.get_url:
     url: '{{ singularity_url }}'
-    dest: {{ singularity_paths.apps }}
+    dest: '{{ singularity_paths.apps }}'
     mode: '0644'
 
 - name: Extract Tarball
