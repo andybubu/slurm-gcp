@@ -38,8 +38,14 @@
     dest: '{{ go_paths.install }}'
     remote_src: true
 
-- name: Set Go Environment Variable
-  ansible.builtin.lineinfile:
-    path: /etc/profile.d/gopath.sh
-    line: 'export PATH=$PATH:{{ go_paths.install }}/go/bin'
-    create: yes
+- name: Add go binary path to ~/.profile
+  lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin'
+    create: true
+    state: present
+
+- name: Remove downloaded tar file
+  ansible.builtin.file:
+    path: '{{ go_paths.build }}/{{ go_tar }}'
+    state: absent

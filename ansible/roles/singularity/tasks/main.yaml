@@ -60,29 +60,22 @@
     src: '{{ paths.build }}/{{ singularity_tar }}'
     dest: '{{ singularity_paths.build }}'
 
-- name: Configure Singularity
-  ansible.builtin.command: |
-    ./mconfig --prefix={{ singularity_paths.apps }}
-  args:
-    chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
-  environment:
-    PATH: "{{ ansible_env.PATH }}:{{ paths.install }}/go/bin"
-    TMPDIR: "/var/tmp/"
-
-- name: Make Singularity
+- name: Build and Install Singularity
   ansible.builtin.shell: |
+    . ~/.bashrc
+    ./mconfig --prefix={{ singularity_paths.apps }} > /dev/null
     make -C ./builddir > /dev/null
-  args:
-    chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
-
-- name: Install Singularity
-  ansible.builtin.shell: |
     make -C ./builddir install > /dev/null
   args:
     chdir: '{{ singularity_paths.build }}/{{ singularity_dir }}'
 
 - name: Set Singularity PATH Environment Variable
-  ansible.builtin.lineinfile:
+  ansible.builtin.shell:
     path: /etc/profile.d/singularity_path.sh
     line: 'export PATH=$PATH:{{ singularity_paths.apps }}/bin'
     create: yes
+
+- name: Remove downloaded tar file
+  ansible.builtin.file:
+    path: '{{ paths.build }}/{{ singularity_tar }}'
+    state: absent
