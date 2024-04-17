@@ -22,5 +22,7 @@ singularity_url: https://github.com/sylabs/singularity/releases/download/v{{ sin
 
 singularity_paths:
   install: '{{ paths.install }}'
-  apps: '{{ paths.apps }}/singularity/{{ singularity_version }}'
+  src: '{{ paths.apps }}/singularity/{{ singularity_version }}/src'
+  build: '{{ paths.build }}/singularity/build'
+  apps: '{{ paths.apps }}/{{ singularity_dir }}'
   modulefiles: '{{ paths.modulefiles }}/singularity'
