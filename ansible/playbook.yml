@@ -90,6 +90,7 @@
   - mariadb
   - libjwt
   - lmod
+  - spack
   - role: singularity
     tags: ['singularity']
   - slurm
