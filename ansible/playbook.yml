@@ -66,6 +66,7 @@
       msg: Update Ansible to at least {{min_ansible_version}} to use this playbook.
 
   roles:
+  - go
   - motd
   - role: common
     tags: ['common']
