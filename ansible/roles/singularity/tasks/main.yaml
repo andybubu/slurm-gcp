@@ -62,7 +62,7 @@
 
 - name: Build and Install Singularity
   ansible.builtin.shell: |
-    . ~/.bashrc
+    . ~/.profile
     ./mconfig --prefix={{ singularity_paths.apps }}
     make -C ./builddir
     make -C ./builddir install

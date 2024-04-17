@@ -40,7 +40,7 @@
 
 - name: Add go binary path to ~/.profile
   lineinfile:
-    path: ~/.bashrc
+    path: ~/.profile
     line: 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin'
     create: true
     state: present
