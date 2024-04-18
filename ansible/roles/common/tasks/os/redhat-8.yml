@@ -18,6 +18,15 @@
     # name: '*'
     # state: latest
     update_cache: yes
+    
+- name: List all enabled repositories
+  yum:
+    list: repos
+  register: yum_repos
+  
+- name: Show repos
+  debug:
+    var: yum_repos.results
 
 - name: Enable RHEL 8 Repository
   command: dnf config-manager --set-enabled rhel-8-for-x86_64-appstream-rpms rhel-8-for-x86_64-baseos-rpms codeready-builder-for-rhel-8-x86_64-rpms
