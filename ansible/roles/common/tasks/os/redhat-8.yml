@@ -19,10 +19,13 @@
     # state: latest
     update_cache: yes
 
-- name: Enable CentOS 8 PowerTools Repository
-  command: dnf config-manager --set-enabled powertools
+- name: Enable RHEL 8 Repository
+  command: dnf config-manager --set-enabled rhel-8-for-x86_64-appstream-rpms rhel-8-for-x86_64-baseos-rpms codeready-builder-for-rhel-8-x86_64-rpms
+  when: "'rhel-8-for-x86_64-baseos-rpms' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
 
-- name: Install epel-release Repository
-  yum:
-    name: epel-release
-    state: present
+- name: Enable rh-cloud-8 Repository
+  command: dnf config-manager --set-enabled rhui-rhel-8-for-x86_64-baseos-rhui-rpms rhui-codeready-builder-for-rhel-8-x86_64-rhui-rpms rhui-codeready-builder-for-rhel-8-x86_64-rhui-rpms
+  when: "'rhui-rhel-8-for-x86_64-baseos-rhui-rpms' in (yum_repos.results | map(attribute='repoid') | map('lower') | list)"
+
+- name : Enable EPEL repository
+  command: dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
